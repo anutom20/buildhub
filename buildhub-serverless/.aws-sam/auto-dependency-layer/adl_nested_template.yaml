@@ -1,0 +1,22 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: AWS SAM CLI Nested Stack for Auto Dependency Layer Creation
+Metadata:
+  SamCliInfo: 1.125.0
+  key: AWS SAM CLI sync command
+Outputs:
+  GeminiStreamFunctionaabd6b8cDepLayer:
+    Value:
+      Ref: GeminiStreamFunctionaabd6b8cDepLayer
+Resources:
+  GeminiStreamFunctionaabd6b8cDepLayer:
+    Metadata:
+      CreatedBy: AWS SAM CLI sync command
+    Properties:
+      CompatibleRuntimes:
+      - nodejs20.x
+      ContentUri: /home/ubuntu/buildhub/buildhub-serverless/.aws-sam/auto-dependency-layer/GeminiStreamFunctionaabd6b8cDepLayer
+      Description: Auto created layer for dependencies of function GeminiStreamFunction
+      LayerName: buildhub-stack453bd51f-GeminiStreamFunctionaabd6b8c-DepLayer
+      RetentionPolicy: Delete
+    Type: AWS::Serverless::LayerVersion
+Transform: AWS::Serverless-2016-10-31

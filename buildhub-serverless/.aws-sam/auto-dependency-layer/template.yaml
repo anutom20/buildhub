@@ -1,0 +1,60 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: gemini-stream
+Transform:
+- AWS::Serverless-2016-10-31
+Parameters:
+  Region:
+    Type: String
+    Default: ap-south-1
+    Description: AWS Region to deploy the Lambda function
+  GeminiApiKey:
+    Type: String
+    Description: Api key for the gemini api
+    Default: AIzaSyAS16s4tCsVo1Kw4N_3OTRz-aSGu2c8kUc
+Resources:
+  GeminiStreamFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: src/handlers/gemini-stream.geminiStream
+      Runtime: nodejs20.x
+      Architectures:
+      - x86_64
+      Timeout: 100
+      Description: A Lambda function that returns a static string.
+      Environment:
+        Variables:
+          GEMINI_API_KEY:
+            Ref: GeminiApiKey
+      FunctionUrlConfig:
+        AuthType: NONE
+        InvokeMode: RESPONSE_STREAM
+        Cors:
+          AllowMethods:
+          - POST
+          AllowOrigins:
+          - '*'
+          AllowHeaders:
+          - '*'
+      CodeUri: GeminiStreamFunction
+      Layers:
+      - Fn::GetAtt:
+        - AwsSamAutoDependencyLayerNestedStack
+        - Outputs.GeminiStreamFunctionaabd6b8cDepLayer
+    Metadata:
+      SamResourceId: GeminiStreamFunction
+  AwsSamAutoDependencyLayerNestedStack:
+    DeletionPolicy: Delete
+    Metadata:
+      CreatedBy: AWS SAM CLI sync command
+    Properties:
+      TemplateURL: /home/ubuntu/buildhub/buildhub-serverless/.aws-sam/auto-dependency-layer/adl_nested_template.yaml
+    Type: AWS::CloudFormation::Stack
+Globals:
+  Function:
+    LoggingConfig:
+      LogFormat: JSON
+Outputs:
+  MyFunctionUrlEndpoint:
+    Description: My Lambda Function URL Endpoint
+    Value:
+      Fn::GetAtt: GeminiStreamFunctionUrl.FunctionUrl
