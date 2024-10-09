@@ -10,7 +10,6 @@ Parameters:
   GeminiApiKey:
     Type: String
     Description: Api key for the gemini api
-    Default: AIzaSyAS16s4tCsVo1Kw4N_3OTRz-aSGu2c8kUc
 Resources:
   GeminiStreamFunction:
     Type: AWS::Serverless::Function

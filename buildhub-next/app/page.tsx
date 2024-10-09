@@ -67,6 +67,10 @@ export default function Home() {
   return (
     <div>
       <h1>Chatbot</h1>
+      <h2>
+        Hey there , i am here to help you identify the need , the 1st step ,
+        start by telling me your name
+      </h2>
       <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
         {messages.map((msg, index) => (
           <div
@@ -103,7 +107,7 @@ export default function Home() {
           value={input}
           onChange={(e) => setInput(e.target.value)}
           placeholder="Type a message..."
-          style={{ padding: "10px", width: "80%" }}
+          style={{ padding: "10px", width: "80%", color: "black" }}
         />
         <button type="submit" style={{ padding: "10px" }}>
           Send
