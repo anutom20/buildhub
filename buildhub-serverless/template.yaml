@@ -12,6 +12,7 @@ Parameters:
   GeminiApiKey:
     Type: String
     Description: "Api key for the gemini api"
+    Default: "AIzaSyAS16s4tCsVo1Kw4N_3OTRz-aSGu2c8kUc"
 
 # Resources declares the AWS resources that you want to include in the stack
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/resources-section-structure.html

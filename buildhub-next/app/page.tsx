@@ -1,118 +1,71 @@
-// pages/index.js
+// // pages/index.js
 "use client";
-import { useState } from "react";
-
-interface MessagePair {
-  user: string;
-  bot: string;
-}
 
 export default function Home() {
-  const [input, setInput] = useState("");
-  const [messages, setMessages] = useState<MessagePair[]>([]);
-
-  const sendMessage = async (e: any) => {
-    e.preventDefault();
-    if (!input) return;
-
-    let history = [];
-
-    for (const message of messages) {
-      history.push({ role: "user", parts: [{ text: message.user }] });
-      history.push({ role: "model", parts: [{ text: message.bot }] });
-    }
-
-    setMessages((prev) => [...prev, { user: input, bot: "" }]);
-
-    const response = await fetch(
-      "https://ptxbilht2ac6s4bg4ozs7bekq40fpqym.lambda-url.ap-south-1.on.aws/",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ prompt: input, history }),
-      }
-    );
-
-    const reader = response?.body?.getReader();
-
-    if (!reader) return;
-
-    const decoder = new TextDecoder("utf-8");
-
-    let done = false;
-
-    let chunkedMessage = "";
-    let messageIndex = messages.length;
-
-    while (!done) {
-      const { value, done: readerDone } = await reader?.read();
-      done = readerDone;
-      const chunk = decoder.decode(value, { stream: true });
-      chunkedMessage += chunk;
-      setMessages((prevMessages) => {
-        const updatedMessages = [...prevMessages];
-        updatedMessages[messageIndex] = {
-          ...updatedMessages[messageIndex],
-          bot: chunkedMessage,
-        };
-        return updatedMessages;
-      });
-    }
-
-    setInput("");
-  };
-
+  const staticImageUrls = [
+    "https://i.pravatar.cc/150?u=a042581f4e29026024d",
+    "https://i.pravatar.cc/150?u=a04258a2462d826712d",
+    "https://i.pravatar.cc/150?u=a042581f4e29026704d",
+    "https://i.pravatar.cc/150?u=a04258114e29026302d",
+    "https://i.pravatar.cc/150?u=a04258114e29026702d",
+    "https://i.pravatar.cc/150?u=a04258114e29026708c",
+  ];
   return (
-    <div>
-      <h1>Chatbot</h1>
-      <h2>
-        Hey there , i am here to help you identify the need , the 1st step ,
-        start by telling me your name
-      </h2>
-      <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
-        {messages.map((msg, index) => (
-          <div
-            key={index}
-            style={{ display: "flex", justifyContent: "space-between" }}
+    <main className="min-h-screen">
+      <nav className="px-4 py-4 md:px-10 flex justify-between items-center text-charcoal-500">
+        <div className="w-1/3 space-x-10 flex items-center">
+          <a href="#" className="hover:text-primary text-lg">
+            Features
+          </a>
+          <a href="#" className="hover:text-primary text-lg">
+            Security
+          </a>
+          <a href="#" className="hover:text-primary text-lg">
+            Pricing
+          </a>
+        </div>
+        <div className="flex items-center">
+          <h1 className="font-black text-5xl text-primary">Makerhub</h1>
+        </div>
+        <div className="w-1/3 items-center flex justify-end space-x-10">
+          <a href="/login" className="hover:text-primary text-lg">
+            Sign In
+          </a>
+          <a
+            href="#"
+            className="bg-transparent hover:bg-primary text-primary  hover:text-white py-3 px-9 border border-primary hover:border-transparent rounded"
           >
-            <div
-              style={{
-                flex: 1,
-                textAlign: "left",
-                border: "1px solid #ccc",
-                padding: "10px",
-              }}
-            >
-              <strong>User:</strong> {msg.user}
-            </div>
-            <div
-              style={{
-                flex: 1,
-                textAlign: "right",
-                border: "1px solid #ccc",
-                padding: "10px",
-              }}
-            >
-              <strong>Bot:</strong> {msg.bot}
-            </div>
-          </div>
-        ))}
-      </div>
-
-      <form onSubmit={sendMessage} style={{ marginTop: "20px" }}>
-        <input
-          type="text"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          placeholder="Type a message..."
-          style={{ padding: "10px", width: "80%", color: "black" }}
-        />
-        <button type="submit" style={{ padding: "10px" }}>
-          Send
+            Get Started
+          </a>
+        </div>
+      </nav>
+      <section className="h-[50vh] mx-8 mt-28 space-y-10 flex items-center justify-content flex-col text-charcoal-500">
+        <h1 className="font-extrabold text-7xl font-bold max-w-4xl text-center">
+          Generate product roadmaps with AI..
+        </h1>
+        <span className="text-2xl text-charcoal">
+          Transform your ideas into a thriving venture with Makerhub
+        </span>
+        <button className="hover:bg-primary text-primary font-bold py-4 px-10 border border-primary rounded hover:text-white">
+          Start for free
         </button>
-      </form>
-    </div>
+        <div className="flex items-center gap-2">
+          <div className="flex items-center justify-center">
+            {staticImageUrls.map((item) => {
+              return (
+                <img
+                  src={item}
+                  className="w-12 h-12 rounded-full border-2 border-gray-300 shadow-lg hover:shadow-xl -ml-2"
+                />
+              );
+            })}
+          </div>
+          <div>
+            <h1 className="font-bold text-lg">Trusted by</h1>
+            <span className="text-lg text-charcoal">many founders</span>
+          </div>
+        </div>
+      </section>
+    </main>
   );
 }

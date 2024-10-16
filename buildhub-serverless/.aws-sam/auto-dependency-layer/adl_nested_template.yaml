@@ -16,7 +16,7 @@ Resources:
       - nodejs20.x
       ContentUri: /home/ubuntu/buildhub/buildhub-serverless/.aws-sam/auto-dependency-layer/GeminiStreamFunctionaabd6b8cDepLayer
       Description: Auto created layer for dependencies of function GeminiStreamFunction
-      LayerName: buildhub-stack453bd51f-GeminiStreamFunctionaabd6b8c-DepLayer
+      LayerName: bulidhub-stack5d51b326-GeminiStreamFunctionaabd6b8c-DepLayer
       RetentionPolicy: Delete
     Type: AWS::Serverless::LayerVersion
 Transform: AWS::Serverless-2016-10-31
