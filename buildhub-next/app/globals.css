@@ -5,8 +5,13 @@
 :root {
   --background: #f7f6f3;
   --foreground: #333333;
-  --primary: #a75d67;
+  --primary: #008080;
   --charcoal: #6d6d6d;
+  --darkBg: #e8e6dd;
+  --lightBg: #f2f1eb;
+  --darkCharcoal: #4d4d4d;
+  --hoverBg: #d0cec0;
+  --numbersBg: #b3b3b3;
 }
 
 /* @media (prefers-color-scheme: dark) {

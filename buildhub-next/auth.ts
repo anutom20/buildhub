@@ -34,7 +34,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     },
 
     redirect() {
-      return "/login";
+      return "/auth/login";
     },
   },
 });

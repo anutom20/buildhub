@@ -28,7 +28,7 @@ export default function Home() {
           <h1 className="font-black text-5xl text-primary">Makerhub</h1>
         </div>
         <div className="w-1/3 items-center flex justify-end space-x-10">
-          <a href="/login" className="hover:text-primary text-lg">
+          <a href="/auth/login" className="hover:text-primary text-lg">
             Sign In
           </a>
           <a
